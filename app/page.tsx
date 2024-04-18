@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import axios, { AxiosError } from 'axios';
 import HUGGING_FACE_MODELS  from './models'
 
@@ -9,6 +9,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [availableModels, setAvailableModels] = useState(HUGGING_FACE_MODELS);
   const [selectedModel, setSelectedModel] = useState(availableModels[0].url);
+  const [userDefinedModel, setUserDefinedModel] = useState('');
 
 
   const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -26,7 +27,8 @@ export default function Home() {
       }
       setLoading(true);
       try {
-          const response = await axios.post('/api/detect', { text, model: selectedModel });
+        const modelPath = userDefinedModel || selectedModel;
+        const response = await axios.post('/api/detect', { text, model: modelPath });
           setResult(response.data);
       } catch (error) {
           console.error('Error from API:', error);
@@ -43,7 +45,7 @@ export default function Home() {
       <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 text-gray-900 ">
           <div className="w-full max-w-2xl p-6 bg-white shadow-md rounded-lg">
               <h1 className="text-3xl font-bold text-center text-gray-900 mb-6">AI Text Detection</h1>
-              <div className="relative inline-block text-left mt-4 mb-4">
+              <div className="relative inline-block text-left mt-4 mb-1">
                   <select
                       value={selectedModel}
                       onChange={(e) => setSelectedModel(e.target.value)}
@@ -70,6 +72,15 @@ export default function Home() {
                           />
                       </svg>
                   </div>
+              </div>
+              <div className="mt-2 relative">
+              <input
+                type="text"
+                value={userDefinedModel}
+                onChange={(e) => setUserDefinedModel(e.target.value)}
+                placeholder="Enter custom model path ex: username/model-name"
+                className="mt-1 mb-4 px-4 py-2 border border-gray-300 rounded-md w-full focus:ring-blue-500 focus:border-blue-500 transition ease-in-out"
+              />
               </div>
               <textarea
                   className="w-full p-3 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition ease-in-out"
