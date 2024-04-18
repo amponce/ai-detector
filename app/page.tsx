@@ -32,7 +32,7 @@ export default function Home() {
       <div className="w-full max-w-2xl p-6 bg-white shadow-md rounded-lg">
         <h1 className="text-3xl font-bold text-center text-gray-900 mb-6">AI Text Detection</h1>
         <textarea
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition ease-in-out"
+          className="w-full p-3 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition ease-in-out"
           value={text}
           onChange={handleTextChange}
           rows={6}
@@ -52,7 +52,7 @@ export default function Home() {
         </div>
         <div className="mt-6">
           <h2 className="text-xl font-semibold text-gray-900">Results:</h2>
-          <pre className="bg-gray-100 p-3 rounded-md overflow-auto">
+          <pre className="bg-gray-100 p-3 rounded-md overflow-auto text-gray-900">
             {JSON.stringify(result, null, 2)}
           </pre>
         </div>
