@@ -11,13 +11,13 @@ export default function Home() {
   const [selectedModel, setSelectedModel] = useState(availableModels[0].url);
 
 
-
   const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
       const newText = event.target.value;
       if (newText.length <= 200) { // Ensuring the length does not exceed 200 characters
-          setText(newText);
+        setText(newText);
       }
   };
+
 
   const handleDetect = async () => {
       if (!text.trim()) {
