@@ -14,7 +14,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({model}) => {
     return (
         // Add your JSX markup here
         <div>
-            {/* Add your component content here */}
+            Chat component will go here
         </div>
     );
 };
