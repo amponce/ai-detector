@@ -1,12 +1,12 @@
-"use client"
-import { useState } from 'react';
-import axios from 'axios';
+"use client";
+import { useState, ChangeEvent } from 'react';
+import axios, { AxiosError } from 'axios';
 
 export default function Home() {
   const [text, setText] = useState('');
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<string | null>(null);
 
-  const handleTextChange = (event) => {
+  const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
 
@@ -16,7 +16,11 @@ export default function Home() {
       setResult(response.data);
     } catch (error) {
       console.error('Error from API:', error);
-      setResult(error.message);
+      if (error instanceof AxiosError) {
+        setResult(error.message);
+      } else {
+        setResult('An unknown error occurred');
+      }
     }
   };
 
@@ -28,7 +32,7 @@ export default function Home() {
           className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition ease-in-out"
           value={text}
           onChange={handleTextChange}
-          rows="6"
+          rows={6}
           placeholder="Enter text to detect..."
         ></textarea>
         <button

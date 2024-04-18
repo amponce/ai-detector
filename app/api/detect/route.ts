@@ -1,6 +1,6 @@
 // app/api/detect/route.ts
 import { NextResponse } from 'next/server';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 export async function POST(request: Request) {
   console.log("API Route hit", request.method);
@@ -16,6 +16,10 @@ export async function POST(request: Request) {
     return NextResponse.json(response.data);
   } catch (error) {
     console.error('Error calling the Hugging Face API:', error);
-    return NextResponse.json({ message: error.message }, { status: error.response?.status || 500 });
+    if (error instanceof AxiosError) {
+      return NextResponse.json({ message: error.message }, { status: error.response?.status || 500 });
+    } else {
+      return NextResponse.json({ message: 'An unknown error occurred' }, { status: 500 });
+    }
   }
 }
