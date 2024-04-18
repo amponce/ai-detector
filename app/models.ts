@@ -15,12 +15,17 @@ const HUGGING_FACE_MODELS = [
       description: 'Designed to discern between AI-generated and human-generated content, this model provides a tool for users needing to verify the authenticity of digital text. Although specific details are sparse, users can explore its capabilities further on its Hugging Face repository page.'
     },
     {
-      name: 'The AIGC Detector',
+      name: 'The AIGC Detector (clicky clicky)',
       url: 'yuchuantian/AIGC_detector_zhv2',
       description: 'The AIGC (AI-Generated Content) Detector employs a Multiscale Positive-Unlabeled (MPU) approach for the detection of AI-generated texts as described in the associated paper. It emphasizes the use of multiple scales of analysis to improve detection accuracy, making it suitable for a variety of applications, from moderating online content to ensuring the integrity of informational publications.'
     },
     {
-      name: 'Detector for AI-generated Text',
+      name: 'OpenAI Detector (DEAD)',
+      url: 'amponce/openai-detector',
+      description: 'Lets hope this shit works'
+    },
+    {
+      name: 'Detector for AI-generated Text (clicky clicky)',
       url: 'microsoft/DialoGPT-medium',
       description: 'This medium-sized model from Microsofts DialoGPT series is specifically trained to detect AI-generated dialogues and conversations.'
     }
